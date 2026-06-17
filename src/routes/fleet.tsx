@@ -12,8 +12,8 @@ export const Route = createFileRoute("/fleet")({
 
 const trend = Array.from({ length: 14 }, (_, i) => ({
   day: `D-${14 - i}`,
-  incidents: Math.round(20 + Math.sin(i / 2) * 8 + Math.random() * 6),
-  score: Math.round(82 + Math.cos(i / 3) * 4 + Math.random() * 2),
+  incidents: Math.round(22 + Math.sin(i / 2) * 8 + ((i * 13) % 7)),
+  score: Math.round(84 + Math.cos(i / 3) * 4 + ((i * 7) % 3)),
 }));
 
 function Fleet() {
