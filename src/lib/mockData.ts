@@ -26,8 +26,10 @@ let seed = 7;
 function srand() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
 function pick<T>(arr: T[]): T { return arr[Math.floor(srand() * arr.length)]; }
 
+const BASE_TIME = new Date("2026-06-17T14:08:22Z").getTime();
+
 export const VIOLATIONS: Violation[] = Array.from({ length: 48 }, (_, i) => {
-  const d = new Date(Date.now() - i * 1000 * 60 * (3 + srand() * 25));
+  const d = new Date(BASE_TIME - i * 1000 * 60 * (3 + srand() * 25));
   return {
     id: `DRSH-${(10248 - i).toString()}`,
     type: pick(TYPES),
