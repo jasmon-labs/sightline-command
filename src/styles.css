@@ -2,6 +2,10 @@
 @source "../src";
 @import "tw-animate-css";
 
+/* Safelist dynamically-composed tone utilities used by alert/insight cards. */
+@source inline("{bg-,border-,text-,from-,to-,ring-}{primary,destructive,success,warning,info}{,/5,/10,/15,/20,/25,/30,/40,/50,/60,/70}");
+@source inline("animate-blink animate-pulse-ring animate-scan animate-fade-in");
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
