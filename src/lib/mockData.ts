@@ -113,14 +113,14 @@ export const FLEET = {
 };
 
 export const SYSTEM_STATUS = [
-  { name: "Backend API", status: "healthy", value: "200 OK", detail: "uptime 14d 06h" },
-  { name: "YOLOv8n Inference", status: "healthy", value: "42 ms", detail: "GPU 38% · queue 0" },
-  { name: "OCR Engine", status: "healthy", value: "98.2%", detail: "PaddleOCR v2.7" },
-  { name: "Camera Network", status: "degraded", value: "312/340", detail: "28 offline" },
-  { name: "Database (Postgres)", status: "healthy", value: "12 ms", detail: "pool 18/50" },
-  { name: "Message Queue", status: "healthy", value: "Kafka", detail: "lag 4 ms" },
-  { name: "Object Storage", status: "healthy", value: "S3", detail: "12.4 TB used" },
-  { name: "Model Registry", status: "healthy", value: "v3.2.1", detail: "released 2026-06-09" },
+  { name: "Backend API",         status: "healthy",  value: "200 OK",     detail: "uptime 14d 06h" },
+  { name: "Model Health",        status: "healthy",  value: "v3.2.1",     detail: "drift 0.4% · nominal" },
+  { name: "Camera Connectivity", status: "degraded", value: "312/340",    detail: "28 offline" },
+  { name: "OCR Engine",          status: "healthy",  value: "98.2%",      detail: "PaddleOCR v2.7" },
+  { name: "Inference Latency",   status: "healthy",  value: "42 ms",      detail: "p95 · YOLOv8n" },
+  { name: "API Status",          status: "healthy",  value: "99.98%",     detail: "30d availability" },
+  { name: "GPU Utilization",     status: "healthy",  value: "38%",        detail: "4× A10 · queue 0" },
+  { name: "Storage Health",      status: "healthy",  value: "12.4 TB",    detail: "S3 · 68% capacity" },
 ];
 
 export function formatTime(iso: string) {
