@@ -114,6 +114,20 @@ function StatusPill({ status }: { status: Violation["status"] }) {
   return <span className={`inline-flex items-center gap-1 rounded border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${map[status]}`}><span className="status-dot bg-current" />{status}</span>;
 }
 
+function FilterGroup({ label, options, active }: { label: string; options: string[]; active: string }) {
+  return (
+    <div>
+      <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{label}</div>
+      <div className="mt-2 flex flex-wrap gap-1.5">
+        {options.map((o) => (
+          <button key={o} className={`chip ${o === active ? "border-primary/50 text-primary bg-primary/10" : "hover:text-foreground"}`}>{o}</button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
 function EvidenceModal({ v, onClose }: { v: Violation; onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-background/70 p-6 backdrop-blur-md animate-fade-in" onClick={onClose}>
