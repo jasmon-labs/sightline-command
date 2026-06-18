@@ -113,16 +113,98 @@ export const FLEET = {
 };
 
 export const SYSTEM_STATUS = [
-  { name: "Backend API", status: "healthy", value: "200 OK", detail: "uptime 14d 06h" },
-  { name: "YOLOv8n Inference", status: "healthy", value: "42 ms", detail: "GPU 38% · queue 0" },
-  { name: "OCR Engine", status: "healthy", value: "98.2%", detail: "PaddleOCR v2.7" },
-  { name: "Camera Network", status: "degraded", value: "312/340", detail: "28 offline" },
-  { name: "Database (Postgres)", status: "healthy", value: "12 ms", detail: "pool 18/50" },
-  { name: "Message Queue", status: "healthy", value: "Kafka", detail: "lag 4 ms" },
-  { name: "Object Storage", status: "healthy", value: "S3", detail: "12.4 TB used" },
-  { name: "Model Registry", status: "healthy", value: "v3.2.1", detail: "released 2026-06-09" },
+  { name: "Backend API",         status: "healthy",  value: "200 OK",     detail: "uptime 14d 06h" },
+  { name: "Model Health",        status: "healthy",  value: "v3.2.1",     detail: "drift 0.4% · nominal" },
+  { name: "Camera Connectivity", status: "degraded", value: "312/340",    detail: "28 offline" },
+  { name: "OCR Engine",          status: "healthy",  value: "98.2%",      detail: "PaddleOCR v2.7" },
+  { name: "Inference Latency",   status: "healthy",  value: "42 ms",      detail: "p95 · YOLOv8n" },
+  { name: "API Status",          status: "healthy",  value: "99.98%",     detail: "30d availability" },
+  { name: "GPU Utilization",     status: "healthy",  value: "38%",        detail: "4× A10 · queue 0" },
+  { name: "Storage Health",      status: "healthy",  value: "12.4 TB",    detail: "S3 · 68% capacity" },
 ];
 
 export function formatTime(iso: string) {
   return new Date(iso).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
 }
+
+export const REPEAT_OFFENDERS = [
+  { plate: "KA03MJ1234", score: 92, count: 14, lastSeen: "KR Puram", type: "Helmet" },
+  { plate: "KA05AB7890", score: 88, count: 11, lastSeen: "Whitefield", type: "Wrong Side" },
+  { plate: "KA01XY6789", score: 84, count: 9, lastSeen: "Silk Board", type: "Signal Jump" },
+  { plate: "KA51MZ4421", score: 79, count: 8, lastSeen: "Indiranagar", type: "Triple Riding" },
+  { plate: "KA09HN7782", score: 74, count: 6, lastSeen: "Hebbal", type: "Helmet" },
+];
+
+export const ACTIVE_ALERTS_SUMMARY = {
+  active: 12,
+  escalated: 3,
+  predicted: 37,
+};
+
+export const AI_RECOMMENDATIONS = [
+  { title: "Deploy officers to KR Puram Junction", priority: "CRITICAL", confidence: 96, action: "Dispatch 2 units", eta: "8 min", junction: "KR Puram" },
+  { title: "Whitefield violation probability +21%", priority: "HIGH", confidence: 91, action: "Pre-position patrol", eta: "12 min", junction: "Whitefield" },
+  { title: "ORR corridor risk elevated", priority: "HIGH", confidence: 88, action: "Mobile checkpoint", eta: "20 min", junction: "ORR" },
+  { title: "Helmet violation surge expected in 45 min", priority: "MEDIUM", confidence: 84, action: "Enforce at Silk Board", eta: "45 min", junction: "Silk Board" },
+];
+
+export const HOURLY_CURVE = [
+  { hour: "06AM", violations: 84 },
+  { hour: "08AM", violations: 312 },
+  { hour: "10AM", violations: 198 },
+  { hour: "12PM", violations: 224 },
+  { hour: "02PM", violations: 176 },
+  { hour: "04PM", violations: 268 },
+  { hour: "06PM", violations: 408 },
+  { hour: "08PM", violations: 286 },
+];
+
+export const DANGEROUS_JUNCTIONS = [
+  { name: "Silk Board", count: 482, risk: "Critical", trend: "+14%" },
+  { name: "KR Puram", count: 421, risk: "Critical", trend: "+9%" },
+  { name: "Whitefield", count: 388, risk: "High", trend: "+6%" },
+  { name: "Hebbal", count: 312, risk: "High", trend: "+3%" },
+  { name: "Indiranagar", count: 264, risk: "Medium", trend: "-2%" },
+];
+
+export const WEATHER_IMPACT = [
+  { condition: "Rain", violations: 421, baseline: 280, delta: "+50%" },
+  { condition: "Clear", violations: 268, baseline: 280, delta: "-4%" },
+  { condition: "Cloudy", violations: 312, baseline: 280, delta: "+11%" },
+];
+
+export const DELIVERY_CORRIDORS = [
+  { zone: "Whitefield", risk: "High", riders: 412, incidents: 18 },
+  { zone: "KR Puram", risk: "Medium", riders: 286, incidents: 9 },
+  { zone: "ORR Corridor", risk: "High", riders: 524, incidents: 21 },
+  { zone: "Indiranagar", risk: "Low", riders: 218, incidents: 3 },
+];
+
+export const SAFETY_RECOMMENDATIONS = [
+  "Launch helmet awareness campaign across Whitefield hub",
+  "Increase monitoring on ORR corridor during 6–9 PM window",
+  "Target helmet compliance audit at KR Puram dispatch",
+  "Reroute night shift around Silk Board congestion zone",
+];
+
+export const OFFICER_DEPLOYMENT = [
+  { junction: "Silk Board", officers: 3, urgency: "Critical" },
+  { junction: "KR Puram", officers: 2, urgency: "High" },
+  { junction: "Whitefield", officers: 1, urgency: "Medium" },
+  { junction: "Hebbal", officers: 1, urgency: "Medium" },
+];
+
+export const AI_FORECAST = [
+  { label: "Helmet violations", change: "+23%", horizon: "Next 60 min", confidence: 92 },
+  { label: "Signal violations", change: "+14%", horizon: "Next 45 min", confidence: 88 },
+  { label: "Wrong-side driving", change: "+9%", horizon: "Next 30 min", confidence: 84 },
+  { label: "Overspeeding (ORR)", change: "+18%", horizon: "Next 90 min", confidence: 81 },
+];
+
+export const MAEP_CAMERAS = [
+  { id: "CAM-A · KR Puram N", angle: "North Approach", confidence: 97 },
+  { id: "CAM-B · KR Puram E", angle: "East Approach", confidence: 95 },
+  { id: "CAM-C · KR Puram S", angle: "South Approach", confidence: 96 },
+  { id: "CAM-D · KR Puram Aerial", angle: "Overhead PTZ", confidence: 98 },
+];
+

@@ -2,8 +2,9 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   LayoutDashboard, ScanSearch, FileSearch, BarChart3, Truck, Flame, ServerCog,
-  ChevronLeft, ChevronRight, LifeBuoy,
+  ChevronLeft, ChevronRight, Siren,
 } from "lucide-react";
+import { ACTIVE_ALERTS_SUMMARY } from "@/lib/mockData";
 
 const NAV = [
   { to: "/", label: "Command Center", icon: LayoutDashboard, code: "CC-01" },
@@ -70,12 +71,24 @@ export function AppSidebar() {
       </nav>
 
       {!collapsed && (
-        <div className="m-3 rounded-md border border-border bg-surface/70 p-3">
-          <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-            <LifeBuoy className="h-3 w-3" /> Clearance
+        <div className="m-3 rounded-md border border-destructive/40 bg-destructive/5 p-3">
+          <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-destructive">
+            <Siren className="h-3 w-3 animate-pulse" /> Active Alerts
           </div>
-          <div className="mt-1 text-sm font-semibold text-foreground">Tier 3 · Operator</div>
-          <div className="mono text-[10px] text-muted-foreground">BTP · FLPK-OPS</div>
+          <div className="mt-2 flex items-baseline gap-1.5">
+            <div className="mono text-2xl font-semibold text-foreground tabular-nums">{ACTIVE_ALERTS_SUMMARY.active}</div>
+            <div className="text-[10px] uppercase tracking-widest text-muted-foreground">live</div>
+          </div>
+          <div className="mt-2 grid grid-cols-2 gap-1.5 text-[10px]">
+            <div className="rounded border border-warning/30 bg-warning/10 px-1.5 py-1">
+              <div className="mono text-sm font-semibold text-warning">{ACTIVE_ALERTS_SUMMARY.escalated}</div>
+              <div className="uppercase tracking-wider text-muted-foreground">Escalated</div>
+            </div>
+            <div className="rounded border border-primary/30 bg-primary/10 px-1.5 py-1">
+              <div className="mono text-sm font-semibold text-primary">{ACTIVE_ALERTS_SUMMARY.predicted}</div>
+              <div className="uppercase tracking-wider text-muted-foreground">Predicted</div>
+            </div>
+          </div>
         </div>
       )}
     </aside>

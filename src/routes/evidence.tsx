@@ -22,7 +22,7 @@ function EvidenceLog() {
       <PageHeader
         eyebrow="MODULE · EV-03"
         title="Evidence Log"
-        description="Tamper-evident registry of all detected violations · cryptographically signed."
+        description="Investigation console · tamper-evident registry · cryptographically signed."
         actions={
           <div className="flex items-center gap-2">
             <button className="chip"><Filter className="h-3 w-3" /> Filter</button>
@@ -30,6 +30,15 @@ function EvidenceLog() {
           </div>
         }
       />
+
+      <Panel title="Investigation Filters" subtitle="Narrow registry by violation type, junction, confidence, date range" code="INV-FLT">
+        <div className="grid gap-3 p-4 md:grid-cols-4">
+          <FilterGroup label="Violation Type" options={["All", "Helmet", "Red Light", "Wrong Side", "Triple Riding"]} active="All" />
+          <FilterGroup label="Junction" options={["All", "Whitefield", "KR Puram", "Silk Board", "Hebbal", "Indiranagar"]} active="All" />
+          <FilterGroup label="Confidence" options={["≥ 80%", "≥ 90%", "≥ 95%"]} active="≥ 90%" />
+          <FilterGroup label="Date Range" options={["24h", "7d", "30d", "Custom"]} active="24h" />
+        </div>
+      </Panel>
 
       <Panel
         title="Registry"
@@ -104,6 +113,20 @@ function StatusPill({ status }: { status: Violation["status"] }) {
   } as const;
   return <span className={`inline-flex items-center gap-1 rounded border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${map[status]}`}><span className="status-dot bg-current" />{status}</span>;
 }
+
+function FilterGroup({ label, options, active }: { label: string; options: string[]; active: string }) {
+  return (
+    <div>
+      <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{label}</div>
+      <div className="mt-2 flex flex-wrap gap-1.5">
+        {options.map((o) => (
+          <button key={o} className={`chip ${o === active ? "border-primary/50 text-primary bg-primary/10" : "hover:text-foreground"}`}>{o}</button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 
 function EvidenceModal({ v, onClose }: { v: Violation; onClose: () => void }) {
   return (
