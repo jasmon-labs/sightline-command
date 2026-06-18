@@ -22,7 +22,7 @@ function EvidenceLog() {
       <PageHeader
         eyebrow="MODULE · EV-03"
         title="Evidence Log"
-        description="Tamper-evident registry of all detected violations · cryptographically signed."
+        description="Investigation console · tamper-evident registry · cryptographically signed."
         actions={
           <div className="flex items-center gap-2">
             <button className="chip"><Filter className="h-3 w-3" /> Filter</button>
@@ -30,6 +30,15 @@ function EvidenceLog() {
           </div>
         }
       />
+
+      <Panel title="Investigation Filters" subtitle="Narrow registry by violation type, junction, confidence, date range" code="INV-FLT">
+        <div className="grid gap-3 p-4 md:grid-cols-4">
+          <FilterGroup label="Violation Type" options={["All", "Helmet", "Red Light", "Wrong Side", "Triple Riding"]} active="All" />
+          <FilterGroup label="Junction" options={["All", "Whitefield", "KR Puram", "Silk Board", "Hebbal", "Indiranagar"]} active="All" />
+          <FilterGroup label="Confidence" options={["≥ 80%", "≥ 90%", "≥ 95%"]} active="≥ 90%" />
+          <FilterGroup label="Date Range" options={["24h", "7d", "30d", "Custom"]} active="24h" />
+        </div>
+      </Panel>
 
       <Panel
         title="Registry"
